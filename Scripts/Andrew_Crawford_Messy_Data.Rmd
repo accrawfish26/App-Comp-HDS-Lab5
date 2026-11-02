@@ -1,0 +1,136 @@
+---
+title: "Andrew_Crawford_Lab3"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+## Packages for cleaning messy data
+
+```{r}
+library(stringr)
+library(lubridate)
+library(dplyr)
+
+messy_sample <- read.csv("lab3/data/messy_samples.csv")
+messy_sample
+
+str(messy_sample)
+
+```
+
+## Cleaning messy_samples.csv 
+
+```{r}
+#Sample_Id Standardization
+
+sample_id_clean <- str_to_upper(messy_sample$sample_id)
+sample_id_clean <- str_remove(sample_id_clean, "-")
+messy_sample$sample_id <- sample_id_clean
+
+messy_sample
+
+# ==========
+
+# Date of Birth Standardization
+
+messy_sample$dob <- case_when(
+  str_detect(messy_sample$dob, "/") ~
+    format(as.Date(messy_sample$dob, "%m/%d/%Y"), "%Y/%m/%d"),
+  
+  str_detect(messy_sample$dob, "\\.") ~
+    format(as.Date(messy_sample$dob, "%m.%d.%y"), "%Y/%m/%d"),
+  
+  str_detect(messy_sample$dob, "^\\d{4}-") ~
+    format(as.Date(messy_sample$dob, "%Y-%m-%d"), "%Y/%m/%d"),
+  
+  TRUE ~
+    format(as.Date(messy_sample$dob, "%d-%b-%Y"), "%Y/%m/%d")
+)
+
+messy_sample$dob
+
+# ========================
+
+#Sex Standardization
+sex_mess <- messy_sample$sex
+
+sex_clean <- str_to_lower(sex_mess)
+
+sex_clean <- case_when(
+  sex_clean == "male" ~ "M",
+  sex_clean == "m" ~ "M",
+  sex_clean == "female" ~ "F",
+  sex_clean == "f" ~ "F",
+  sex_clean == "unknown" ~ "NA",
+  sex_clean == "u" ~ "NA",
+  TRUE ~ "NA"
+)
+
+messy_sample$sex <- sex_clean
+messy_sample$sex
+
+# =========
+
+# Enrollment Sites Standardization
+site_clean <- str_to_lower(messy_sample$enrollment_site)
+site_clean <- str_extract(site_clean, "[abc]")
+site_clean <- str_to_upper(site_clean)
+
+messy_sample$enrollment_site <- site_clean
+
+# ===================
+
+#Glucose Value & Unit Standardization
+
+unit_clean <- str_to_lower(messy_sample$glucose_unit)
+
+unit_clean <- case_when(
+  str_detect(unit_clean, "mmol") ~ "mg/dl",
+  TRUE ~ unit_clean
+)
+
+messy_sample$glucose_unit <- unit_clean
+
+# ====================
+
+# Cleaned & Standardization sample
+
+cleaned_sample <- messy_sample
+
+View(cleaned_sample)
+
+write.csv(cleaned_sample, "AndrewLab4/output/clean_sample.csv", row.names = FALSE)
+
+```
+
+## Cleaning Messy_sequences.fasta
+
+```{r}
+headers_fasta <- readLines("lab3/data/messy_sequences.fasta")
+headers_fasta <- headers_fasta[str_starts(headers_fasta, ">")]
+headers_fasta
+```
+
+```{r}
+sample_id_pattern <- "((?i)>s[\\w_-]+)"
+organism_pattern  <- "(H....[\\w_]+)"
+gene_name_pattern <- "(?<=gene=)\\w+|(?<=target=)\\w+|EGFR|TP53"
+gene_len_pattern <- "(?<=len[=:])\\w+|(?<=length=)\\d+| \\d.."
+
+extracted <- data.frame(
+  sample_id = str_extract(headers_fasta, sample_id_pattern),
+  organism = str_extract(headers_fasta, organism_pattern),
+  gene_name = str_extract(headers_fasta, gene_name_pattern),
+  gene_len = str_extract(headers_fasta, gene_len_pattern),
+  stringsAsFactors = FALSE
+)
+
+clean_sequence <- extracted
+
+View(clean_sequence)
+
+write.csv(clean_sequence, "lab3/output/clean_sample.csv", row.names = FALSE)
+```
+

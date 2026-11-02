@@ -1,0 +1,21 @@
+# --- Secrets:
+.env
+.envrc
+
+# --- Data:
+data/
+Data/
+*.db
+!results/feature_table.tsv
+
+# --- Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# --- OS files
+.DS_Store
+Thumbs.db
+
