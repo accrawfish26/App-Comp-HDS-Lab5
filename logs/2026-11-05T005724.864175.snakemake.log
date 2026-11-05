@@ -1,0 +1,67 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-11-05 00:57:25
+  Workflow ID: 20753437-38f6-4f11-a1bc-2f90205311c2
+  Platform: Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.43
+  Host: Accrawfish26
+  User: crawf
+  Snakemake version: 9.23.1
+  Python version: 3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]
+  Command: /home/crawf/miniforge3/envs/lab5/bin/snakemake --cores 4
+  Snakefile: /mnt/c/users/crawf/downloads/appcomphds/lab5/Snakefile
+  Base directory: /mnt/c/users/crawf/downloads/appcomphds/lab5
+  Run directory: /mnt/c/users/crawf/downloads/appcomphds/lab5
+  Working directory: /mnt/c/users/crawf/downloads/appcomphds/lab5
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+clean_patient_table          1
+merge_analytic_tables        1
+all                          1
+total                        3
+
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Nov  5 00:57:25 2026]
+localrule clean_patient_table:
+    input: Data/messy_data.csv
+    output: Results/clean_data.csv
+    jobid: 1
+    reason: Missing output files: Results/clean_data.csv
+    resources: tmpdir=/tmp
+[Thu Nov  5 00:57:26 2026]
+Finished jobid: 1 (Rule: clean_patient_table)
+1 of 3 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Nov  5 00:57:26 2026]
+localrule merge_analytic_tables:
+    input: Results/clean_data.csv, Results/feature_table.tsv
+    output: Results/analytic_table.csv
+    jobid: 3
+    reason: Missing output files: Results/analytic_table.csv; Input files updated by another job: Results/clean_data.csv
+    resources: tmpdir=/tmp
+[Thu Nov  5 00:57:27 2026]
+Finished jobid: 3 (Rule: merge_analytic_tables)
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Nov  5 00:57:27 2026]
+localrule all:
+    input: Results/clean_data.csv, Results/feature_table.tsv, Results/analytic_table.csv
+    jobid: 0
+    reason: Input files updated by another job: Results/analytic_table.csv, Results/clean_data.csv
+    resources: tmpdir=/tmp
+[Thu Nov  5 00:57:27 2026]
+Finished jobid: 0 (Rule: all)
+3 of 3 steps (100%) done
+Complete log(s): /mnt/c/users/crawf/downloads/appcomphds/lab5/.snakemake/log/2026-11-05T005724.864175.snakemake.log
