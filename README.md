@@ -56,7 +56,7 @@ conda activate lab5
 cd Scripts
 jupyter lab
 ```
-This includes a description of the metadata included in the table, performs descriptive analysis on certain variables, and produces visualizations of those trends. This led to creating a **summary report that can be found at the bottom of the 'Scripts/Analytic_Summary_Report.ipynb`**
+This includes a description of the metadata included in the table, performs descriptive analysis on certain variables, and produces visualizations of those trends. This led to creating a **summary report that can be found at the bottom of the `Scripts/Analytic_Summary_Report.ipynb`**
 
 ### Logs
 This notes a successful run of the snakemake, and when reproduced, should aim for something similar. 
