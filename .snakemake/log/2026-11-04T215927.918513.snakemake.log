@@ -1,3 +1,0 @@
-TypeError in file /mnt/c/users/crawf/downloads/appcomphds/Lab5/Snakefile, line 2:
-Workflow.configfile() missing 1 required positional argument: 'fp'
-  File "/mnt/c/users/crawf/downloads/appcomphds/Lab5/Snakefile", line 2, in <module>
