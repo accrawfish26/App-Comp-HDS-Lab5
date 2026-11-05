@@ -1,0 +1,40 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-11-04 23:13:39
+  Workflow ID: 7c075d8c-03c3-4f1d-9a08-dc0b2d7ea8d4
+  Platform: Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.43
+  Host: Accrawfish26
+  User: crawf
+  Snakemake version: 9.23.1
+  Python version: 3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]
+  Command: /home/crawf/miniforge3/envs/lab5/bin/snakemake --cores 1
+  Snakefile: /mnt/c/users/crawf/downloads/appcomphds/Lab5/Snakefile
+  Base directory: /mnt/c/users/crawf/downloads/appcomphds/Lab5
+  Run directory: /mnt/c/users/crawf/downloads/appcomphds/Lab5
+  Working directory: /mnt/c/users/crawf/downloads/appcomphds/Lab5
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+create_feature_table        1
+all                         1
+total                       2
+
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Nov  4 23:13:39 2026]
+localrule create_feature_table:
+    input: Data/cohort.db
+    output: Results/feature_table.tsv
+    jobid: 2
+    reason: Missing output files: Results/feature_table.tsv
+    resources: tmpdir=/tmp
+Terminating processes on user request, this might take some time.

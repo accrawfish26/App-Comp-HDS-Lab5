@@ -1,0 +1,9 @@
+Building DAG of jobs...
+Creating conda environment r.yaml...
+Downloading and installing remote packages.
+CreateCondaEnvironmentException:
+Could not create conda environment from /mnt/c/users/crawf/downloads/appcomphds/Lab5/r.yaml:
+Command:
+mamba env create --quiet --file "/mnt/c/users/crawf/downloads/appcomphds/Lab5/.snakemake/conda/443e8b9f258dd57d32a6703da6941f0b_.yaml" --prefix "/mnt/c/users/crawf/downloads/appcomphds/Lab5/.snakemake/conda/443e8b9f258dd57d32a6703da6941f0b_"
+Output:
+

@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+all                        1
+clean_patient_table        1
+total                      2
+
+Select jobs to execute...
+
+[Wed Nov  4 22:37:03 2026]
+rule clean_patient_table:
+    input: Data/messy_data.csv
+    output: Results/clean_data.csv
+    jobid: 1
+    reason: Missing output files: Results/clean_data.csv
+    resources: tmpdir=/tmp
+
+[Wed Nov  4 22:37:03 2026]
+Error in rule clean_patient_table:
+    jobid: 1
+    input: Data/messy_data.csv
+    output: Results/clean_data.csv
+
+RuleException:
+CalledProcessError in file /mnt/c/users/crawf/downloads/appcomphds/Lab5/Snakefile, line 14:
+Command 'set -euo pipefail;  Rscript --vanilla /mnt/c/users/crawf/downloads/appcomphds/Lab5/.snakemake/scripts/tmpjyyhw71c.cleaning_data.R' returned non-zero exit status 1.
+  File "/mnt/c/users/crawf/downloads/appcomphds/Lab5/Snakefile", line 14, in __rule_clean_patient_table
+  File "/usr/lib/python3.14/concurrent/futures/thread.py", line 86, in run
+  File "/usr/lib/python3.14/concurrent/futures/thread.py", line 73, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2026-11-04T223703.006618.snakemake.log

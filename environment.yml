@@ -1,0 +1,10 @@
+name: lab5
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - pandas=2.3.3
+  - snakemake=9.23.1
+  - r-base
+  - r-dplyr
+  - r-stringr

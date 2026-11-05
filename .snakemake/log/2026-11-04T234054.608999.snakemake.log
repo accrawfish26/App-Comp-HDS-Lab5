@@ -1,0 +1,57 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+all                          1
+clean_patient_table          1
+create_feature_table         1
+merge_analytic_tables        1
+total                        4
+
+Select jobs to execute...
+
+[Wed Nov  4 23:40:55 2026]
+rule create_feature_table:
+    input: Data/cohort.db
+    output: Results/feature_table.tsv
+    jobid: 2
+    reason: Missing output files: Results/feature_table.tsv
+    resources: tmpdir=/tmp
+
+[Wed Nov  4 23:40:55 2026]
+rule clean_patient_table:
+    input: Data/messy_data.csv
+    output: Results/clean_data.csv
+    jobid: 1
+    reason: Code has changed since last execution
+    resources: tmpdir=/tmp
+
+[Wed Nov  4 23:40:56 2026]
+Error in rule clean_patient_table:
+    jobid: 1
+    input: Data/messy_data.csv
+    output: Results/clean_data.csv
+
+RuleException:
+CalledProcessError in file /mnt/c/users/crawf/downloads/appcomphds/lab5/Snakefile, line 16:
+Command 'set -euo pipefail;  Rscript --vanilla /mnt/c/users/crawf/downloads/appcomphds/lab5/.snakemake/scripts/tmptr6ffzdd.cleaning_data.R' returned non-zero exit status 1.
+  File "/mnt/c/users/crawf/downloads/appcomphds/lab5/Snakefile", line 16, in __rule_clean_patient_table
+  File "/usr/lib/python3.14/concurrent/futures/thread.py", line 86, in run
+  File "/usr/lib/python3.14/concurrent/futures/thread.py", line 73, in run
+Terminating processes on user request, this might take some time.
+[Wed Nov  4 23:45:11 2026]
+Error in rule create_feature_table:
+    jobid: 2
+    input: Data/cohort.db
+    output: Results/feature_table.tsv
+
+RuleException:
+CalledProcessError in file /mnt/c/users/crawf/downloads/appcomphds/lab5/Snakefile, line 25:
+Command 'set -euo pipefail;  /usr/bin/python3 /mnt/c/users/crawf/downloads/appcomphds/lab5/.snakemake/scripts/tmp62ba2apk.feature_table.py' died with <Signals.SIGINT: 2>.
+  File "/mnt/c/users/crawf/downloads/appcomphds/lab5/Snakefile", line 25, in __rule_create_feature_table
+  File "/usr/lib/python3.14/concurrent/futures/thread.py", line 86, in run
+  File "/usr/lib/python3.14/concurrent/futures/thread.py", line 73, in run
+Complete log: .snakemake/log/2026-11-04T234054.608999.snakemake.log
