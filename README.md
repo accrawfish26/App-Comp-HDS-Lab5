@@ -8,11 +8,12 @@
 git clone https://github.com/accrawfish26/App-Comp-HDS-Lab4.git
 ```
 2. Set the working directory to the repository root
-3. Activate Conda to open the `environment.yml` file to install necessary packages
+3. Activate Conda to open the `environment.yml` file to install necessary packages to set space as conda lab5.
 
 ```
-conda activate
 conda env -f environment.yml
+
+conda activate lab5
 
 ```
 3. Test that snakemake runs with `snakemake -n`. The expected results for job status:
@@ -48,3 +49,17 @@ The primary purpose was reusing lab 4 script to create a feature table from the 
 ## Rule 3
 
 The primary purpose was obtaining rule 2 & 3 data to merge together as the analytic table found in `Results/analytic_table.csv`. The script that performed this was `Scripts/analytic_table.py`. Something worth noting that rule 2 & 3 sourced from data that are not related to eachother, in terms of being different people/patients. As a result, the merge kept each respective entry, where patients were merged together and kept related metadata per patient. The cells marked as 'NA' suggest they had no data as they had not obtained data from the respective source dataset. 
+
+## Other Folders & Notes
+
+### Logs
+This note a successful run of the snakemake, and when reproduce, should aim for something similar. 
+
+### Scripts/Notebook
+Contain a notebook that run some basic analysis on the table created through snakemake. This can be accessed by:
+```
+conda activate lab5
+
+cd Scripts
+jupyter lab
+``` 
