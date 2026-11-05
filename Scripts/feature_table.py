@@ -70,6 +70,5 @@ OUT = Path(snakemake.output[0])
 OUT.parent.mkdir(parents=True, exist_ok=True)
 
 feature_table.to_csv(OUT, sep="\t", index=False, na_rep="NA")
-print("file saved at", OUT)
 
 con.close()
