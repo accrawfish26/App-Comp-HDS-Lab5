@@ -24,7 +24,7 @@ print(pd.read_sql("SELECT COUNT(*) FROM samples s WHERE NOT EXISTS(SELECT 1 FROM
 # Note: CROSS JOIN is used to help join genes with patient data as 5 row data per patients
 # Note: UNION ALL is used to help put the counts of names into rows that joint through the CROSS JOIN to patient table
 # Note: Silent mutations of the 5 genes were removed using IS NOT SILENT from the variant_classification
-gene = pd.read_sql("SELECT p.patient_id, g.gene_symbol, CASE WHEN NOT EXISTS(SELECT 1 FROM mutations m WHERE m.sample_id = s.sample_id) THEN NULL ELSE COUNT (m.mutation_id) END AS gene_count FROM patients p CROSS JOIN (SELECT 'TP53' AS gene_symbol UNION ALL SELECT 'KRAS' UNION ALL SELECT 'EGFR' UNION ALL SELECT 'STK11' UNION ALL SELECT 'KEAP1') g LEFT JOIN samples s ON s.patient_id = p.patient_id LEFT JOIN mutations m ON m.sample_id = s.sample_id AND m.gene_symbol = g.gene_symbol AND m.variant_classification IS NOT 'Silent' GROUP BY p.patient_id, g.gene_symbol", con)
+gene = pd.read_sql("""SELECT p.patient_id, g.gene_symbol, CASE WHEN s.sample_id IS NULL THEN NULL WHEN mc.sample_id IS NULL THEN NULL ELSE COALESCE(mc.gene_count, 0) END AS gene_count FROM patients p CROSS JOIN (SELECT 'TP53' AS gene_symbol UNION ALL SELECT 'KRAS' UNION ALL SELECT 'EGFR' UNION ALL SELECT 'STK11' UNION ALL SELECT 'KEAP1') g LEFT JOIN samples s ON s.patient_id = p.patient_id LEFT JOIN (SELECT sample_id, gene_symbol, COUNT(mutation_id) AS gene_count FROM mutations WHERE variant_classification IS NOT 'Silent' GROUP BY sample_id, gene_symbol) mc ON mc.sample_id = s.sample_id AND mc.gene_symbol = g.gene_symbol""", con)
 
 # Initial varification tables were produced with desired headers
 print(patients.head())
