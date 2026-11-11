@@ -13,7 +13,12 @@ snakemake: error: unrecognized arguments: --software-deployment-method
 **ChatGPT Suggested Fit:**
 Provide the current versions of Snakemake and Conda you are using, and share the code that came before the error message. Most likely, use `--use-conda` instead to run with packages needed for files.
 
-**My Edits:**
+**Agent:** GitHub Copilot
+
+**Agent Validation:**
+
+
+**My Edits & My Validation of Code:**
 I ran with `--use-conda` and had success. This was also a turning point in learning about how `environment.yml` can be used instead, and it's a lot easier, to provide packages and dependencies for the `snakemake --cores` function to run through. 
 
 ==============================================
